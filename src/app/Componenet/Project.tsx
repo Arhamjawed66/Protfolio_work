@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import {  SchoolIcon } from 'lucide-react'
+import { SchoolIcon } from 'lucide-react'
 import { FaGithub } from "react-icons/fa";
 
 import React, { useState } from 'react'
@@ -58,18 +58,19 @@ const Project = () => {
       </CardHeader>
       <CardContent >
         {/* <div data-aos="zoom-in" className=" flex flex-wrap -m-4"> */}
-          {/* <div className="container px-5 py-24 mx-auto "> */}
-          <div data-aos="zoom-in" className="grid grid-cols-3 gap-4 ">
-           {assigmt_arry.map((item,index)=>(
+        {/* <div className="container px-5 py-24 mx-auto "> */}
+        <div data-aos="zoom-in" className="grid grid-cols-3 gap-4 ">
+          {assigmt_arry.map((item, index) => (
             <div key={index} className=" -m-4 mb-5">
               <div className="lg:w-1/1 sm:w-1/1 p-4 ">
                 <div className="flex relative">
-                  
+
                   <Image
-                    src="/asset/download.png" 
-                    alt="Description" 
-                    width={500} 
-                    height={300}
+                    src="/asset/download.png"    // Correct relative path
+                    alt="Download Icon"          // Alt description for accessibility
+                    width={500}                  // Set width (required)
+                    height={300}                 // Set height (required)
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                   />
                   <div className="px-8 py-10 relative z-10 w-full border-2 border-gray-400 bg-white opacity-0 hover:opacity-100">
                     <h2 className="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">
@@ -79,22 +80,20 @@ const Project = () => {
                       {item.name}
                     </h1>
                     <div>
-                    <Link href={item.code} target='_blank' className="leading-relaxed ">
-                      <Button>
-                    <FaGithub className='mr-5 text-2xl hover:text-[#dedcf1b3]' />
-                    preview</Button>
-                    </Link>
+                      <Link href={item.code} target='_blank' className="leading-relaxed ">
+                        <Button>
+                          <FaGithub className='mr-5 text-2xl hover:text-[#dedcf1b3]' />
+                          preview</Button>
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            ))}
-            
-  
-</div>
+          ))}
 
-            
+
+        </div>
 
 
 
@@ -106,7 +105,9 @@ const Project = () => {
 
 
 
-          {/* </div> */}
+
+
+        {/* </div> */}
         {/* </div> */}
 
       </CardContent>
