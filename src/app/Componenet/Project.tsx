@@ -66,9 +66,10 @@ const Project = () => {
                 <div className="flex relative">
                   
                   <Image
-                    alt="gallery"
-                    className="absolute inset-0 w-full h-full  object-cover object-center"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN5XaPknTWTxdBcdC3r0_9blSi_8n3rD_2Xg&s" 
+                    src="/asset/download.png" 
+                    alt="Description" 
+                    width={500} 
+                    height={300}
                   />
                   <div className="px-8 py-10 relative z-10 w-full border-2 border-gray-400 bg-white opacity-0 hover:opacity-100">
                     <h2 className="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">
