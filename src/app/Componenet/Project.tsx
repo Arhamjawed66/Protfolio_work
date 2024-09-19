@@ -5,6 +5,7 @@ import { FaGithub } from "react-icons/fa";
 import React, { useState } from 'react'
 import { Button } from './button'
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Project = () => {
   const assigmt_arry = [{
@@ -59,11 +60,12 @@ const Project = () => {
         {/* <div data-aos="zoom-in" className=" flex flex-wrap -m-4"> */}
           {/* <div className="container px-5 py-24 mx-auto "> */}
           <div data-aos="zoom-in" className="grid grid-cols-3 gap-4 ">
-           {assigmt_arry.map((item,i)=>(
-            <div className=" -m-4 mb-5">
+           {assigmt_arry.map((item,index)=>(
+            <div key={index} className=" -m-4 mb-5">
               <div className="lg:w-1/1 sm:w-1/1 p-4 ">
                 <div className="flex relative">
-                  <img
+                  
+                  <Image
                     alt="gallery"
                     className="absolute inset-0 w-full h-full  object-cover object-center"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN5XaPknTWTxdBcdC3r0_9blSi_8n3rD_2Xg&s" 
