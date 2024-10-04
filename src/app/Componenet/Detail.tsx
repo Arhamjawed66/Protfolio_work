@@ -20,8 +20,10 @@ import Skill from "./Skill";
 import Project from "./Project";
 
 export function Detail() {
-  return (
-    <Tabs defaultValue="Education" className="mt-5 w-full p-2 ">
+  return(
+    <div className="h-screen flex flex-col">
+  
+    <Tabs defaultValue="Education" className="mt-5 w-full p-2 flex-col ">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="Education" className="text-lg">Education</TabsTrigger>
         <TabsTrigger value="Skill" className="text-lg">Skill</TabsTrigger>
@@ -44,6 +46,7 @@ export function Detail() {
         </TabsContent>
       
     </Tabs>
+    </div>
   )
 }
 

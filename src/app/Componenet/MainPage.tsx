@@ -10,24 +10,24 @@ import Detail from "./Detail";
 
 const MainPage = () => {
 
-    useEffect(()=>{
-        Aos.init({
-          once:false
-        });
-      },[]);
+  useEffect(() => {
+    Aos.init({
+      once: false
+    });
+  }, []);
 
   return (
-  <div className="flex overflow-hidden h-screen">
-    {/*sidebar*/}
-<div className="w-1/5">
-    <SideBar/>
-</div>
+    <div className="flex overflow-hidden h-screen">
+      {/*sidebar*/}
+      <div className="w-1/3">
+        <SideBar />
+      </div>
 
 
-    {/*Detail*/}
-<div className="w-full">
-    <Detail/>
-</div>
+      {/*Detail*/}
+      <div className="w-full">
+        <Detail />
+      </div>
 
     </div>
   )

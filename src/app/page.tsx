@@ -1,3 +1,4 @@
+
 import MainPage from "./Componenet/MainPage";
 
 
@@ -6,10 +7,13 @@ import MainPage from "./Componenet/MainPage";
 
 
 export default function Home() {
-  
+
 
   return (
-  <MainPage/>
-    
+    <div>
+      
+      <MainPage/>
+    </div>
+
   );
 }
