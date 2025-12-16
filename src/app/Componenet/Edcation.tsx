@@ -1,58 +1,115 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { SchoolIcon } from 'lucide-react'
-import React, { useState } from 'react'
+"use client";
+import { motion } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Building, GraduationCap } from "lucide-react";
+
+const educationHistory = [
+  {
+    degree: "Matriculation (Computer Science)",
+    institution: "Al Mumtazz Islamic School",
+    year: "2010",
+    description: "Gained foundational knowledge in programming and computer applications.",
+  },
+  {
+    degree: "Intermediate (Computer Science)",
+    institution: "Siraj-ud-Dullah College",
+    year: "2015",
+    description: "Acquired essential skills and a deeper understanding of computer science principles.",
+  },
+  {
+    degree: "Full-Stack Web Development",
+    institution: "S.M.I.T",
+    year: "2023-Present",
+    description: "Comprehensive training in modern web technologies, including MERN stack and frontend/backend development.",
+  },
+  {
+    degree: "Certified AI Developer",
+    institution: "G.A.I.C",
+    year: "2023-Present",
+    description: "Enrolled in an advanced AI program covering Python, Meta 3.0, and cutting-edge AI concepts.",
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = (fromLeft: boolean) => ({
+  hidden: { x: fromLeft ? -100 : 100, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+    },
+  },
+});
 
 const Education = () => {
-  const [detail, setDetail] = useState([
-    {
-      ed: "Matric",
-      SchoolName: "Al Mumtazz Islamic",
-      dec: "I completed my Matriculation with a focus on Computer Science in 2010, where I gained basic knowledge in programming and computer applications."
-    },
-    {
-      ed: "Inter",
-      SchoolName: "Siraj-ud-Dullah",
-      dec: "Completed Intermediate in 2015 with a focus on Computer Science, acquiring essential skills and knowledge in the field."
-    },
-    {
-      ed: "I.T",
-      SchoolName: "S.M.I.T",
-      dec: "After completing Intermediate, I pursued a Full Stack Development course at SMIT, which is my final year. This course is crucial for my career, providing me with skills in modern web technologies, backend development, and frontend development."
-    },
-    {
-      ed: "A.I",
-      SchoolName: "G.A.I.C",
-      dec: "In addition to my Full Stack Development course at SMIT, I am also enrolled in an AI course at GAIC. This program includes studies in Python, Meta 3.0, and advanced AI concepts, enhancing my skills in cutting-edge technologies and artificial intelligence."
-    }
-  ]);
- 
   return (
-    <Card className='h-[85vh] overflow-x-auto'>
+    <Card className="h-[85vh] overflow-y-auto border-none shadow-none">
       <CardHeader>
-        <CardTitle className='uppercase'>Education</CardTitle>
+        <CardTitle className="uppercase text-2xl font-bold text-primary">
+          Education & Certification
+        </CardTitle>
       </CardHeader>
-      <CardContent className='space-y-2'>
-        <div  data-aos="zoom-in"className="flex flex-wrap -m-4">
-          {detail.map((item, index) => (
-            <div key={index} className="p-4 lg:w-1/2">
-              <div   className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
-                <h2 className="tracking-widest  title-font font-medium text-gray-600 mb-1">
-                  {item.ed}
-                </h2>
-                <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
-                  {item.SchoolName}
-                </h1>
-                <p className="leading-relaxed mb-3">
-                  {item.dec}
-                </p>
-              </div>
-            </div>
-          ))}
+      <CardContent className="p-4">
+        <div className="relative">
+          {/* Vertical line */}
+          <div className="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-border"></div>
+
+          <motion.div
+            className="space-y-12"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            {educationHistory.map((item, index) => (
+              <motion.div
+                key={index}
+                className={`relative flex items-center ${
+                  index % 2 === 0 ? "justify-start" : "justify-end"
+                }`}
+                variants={itemVariants(index % 2 === 0)}
+              >
+                {/* Timeline Circle */}
+                <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-2 border-card"></div>
+
+                <Card
+                  className={`w-[calc(50%-2rem)] ${
+                    index % 2 === 0 ? "mr-auto" : "ml-auto"
+                  }`}
+                >
+                  <CardHeader>
+                    <div className="flex items-center space-x-2 text-primary">
+                       <GraduationCap className="h-6 w-6" />
+                       <CardTitle className="text-lg font-bold">{item.degree}</CardTitle>
+                    </div>
+                    <div className="flex items-center space-x-2 text-sm text-muted-foreground pt-1">
+                      <Building className="h-4 w-4" />
+                      <span>{item.institution} - {item.year}</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-foreground/80">{item.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default Education
+export default Education;
 

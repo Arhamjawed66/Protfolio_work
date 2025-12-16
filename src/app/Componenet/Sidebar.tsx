@@ -1,97 +1,109 @@
+"use client";
 import Image from "next/image";
-import { Button } from '@/app/Componenet/button';
-import Typewriter from 'typewriter-effect';
-import { FaLinkedin } from "react-icons/fa6";
-import Link from "next/link";
-import { FaFacebookSquare, FaGithubSquare, } from "react-icons/fa";
-import { FcDownload } from "react-icons/fc";
+import { motion } from "framer-motion";
+import { FaLinkedin, FaFacebookSquare, FaGithubSquare } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
+import Link from "next/link";
+import { Button } from "@/app/Componenet/button";
+import { FcDownload } from "react-icons/fc";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
 
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
+export function SideBar({ onTabChange }) {
+  const name = "ABDUL JAWED";
+  const title = "Full-Stack Developer";
 
-
-
-
-export function SideBar() {
   return (
-    <div className="h-screen flex  flex-col items-center p-3 ">
-      {/* image */}
-      <Image src="/asset/pexels-moh-adbelghaffar-771742.jpg"
-        alt="Image description" width={500} height={200}
-        className=" rounded-md " />
+    <motion.div
+      className="h-screen flex flex-col justify-center items-center p-4 space-y-6 bg-secondary/30"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Image */}
+      <motion.div variants={itemVariants}>
+        <Image
+          src="/asset/pexels-moh-adbelghaffar-771742.jpg"
+          alt="Abdul Jawed"
+          width={150}
+          height={150}
+          className="rounded-full border-4 border-primary shadow-lg"
+          priority
+        />
+      </motion.div>
 
-      {/* name  */}
-      <div className="mt-2">
-        <h1 className="font-bold text-2xl text-blue-650">ABDUL JAWED</h1>
-        <h2 className="font-semibold text-lg text-center
-        text-blue-900">
-          <Typewriter
-            options={{
-              strings:
-                ['Web-Developer',
-                  'Front-Developer',
-                  `Shopify-Developer`],
-              autoStart: true,
-              loop: true,
-            }}
-          /></h2>
+      {/* Name and Title */}
+      <motion.div className="text-center" variants={itemVariants}>
+        <h1 className="font-bold text-4xl text-foreground">{name}</h1>
+        <motion.h2
+          className="font-semibold text-lg text-primary mt-1"
+          variants={containerVariants}
+        >
+          {title.split("").map((char, index) => (
+            <motion.span key={index} variants={itemVariants}>
+              {char}
+            </motion.span>
+          ))}
+        </motion.h2>
+      </motion.div>
 
-      </div>
-
-      {/* s-media */}
-      <div className=" grid grid-cols-3 gap-2 ">
-
-        <div className="flex relative">
-          <Link href="https://www.linkedin.com/in/jawed-ahmed-0575b32b6"
-            target="_blank" className="text-gray-600 hover:text-[#0762c8]">
-            <FaLinkedin className="text-4xl" />
-          </Link>
-        </div>
-
-        <div>
-          <Link href="https://www.facebook.com/profile.php?id=100079156832868&mibextid=ZbWKwL"
-            target="_blank" className="text-gray-600 hover:text-[#0762c8]">
-            <FaFacebookSquare className="text-4xl" />
-          </Link>
-        </div>
-
-
-        <div>
-          <Link href="https://arhamjawed66.github.io/my-work/"
-            target="_blank" className="text-gray-600 hover:text-[#3526a582]">
-            <FaGithubSquare className="text-4xl" />
-          </Link>
-        </div>
-      </div>
-
-      {/* cv */}
-      <div className="mt-2">
-        <Link href="/asset/cv/cv.pdf" target="_blank" >
-          <Button className="hover:text-blue-500 hover:after:text-lime-500 ">
-            <FcDownload className=" mr-2 h-5 w-5" /> Download CV
-          </Button>
+      {/* Social Media Links */}
+      <motion.div className="flex space-x-4" variants={itemVariants}>
+        <Link href="https://www.linkedin.com/in/jawed-ahmed-0575b32b6" target="_blank">
+          <FaLinkedin className="text-3xl text-muted-foreground hover:text-primary transition-colors" />
         </Link>
+        <Link href="https://github.com/arhamjawed66" target="_blank">
+          <FaGithubSquare className="text-3xl text-muted-foreground hover:text-primary transition-colors" />
+        </Link>
+        <Link href="mailto:abduljawed6663@gmail.com" target="_blank">
+          <SiGmail className="text-3xl text-muted-foreground hover:text-primary transition-colors" />
+        </Link>
+        <Link href="https://www.facebook.com/profile.php?id=100079156832868" target="_blank">
+          <FaFacebookSquare className="text-3xl text-muted-foreground hover:text-primary transition-colors" />
+        </Link>
+      </motion.div>
 
-      </div>
-
-      <div>
-        <h2 className="font-semibold text-lg text-center
-        text-blue-900 mt-5">
-          <Typewriter
-            options={{
-              strings:
-                ['Contact',
-                  '03422706023',
-                  `abduljawed6663@gmail.com`],
-              autoStart: true,
-              loop: true,
-            }}
-          /></h2>
-      </div>
-    </div>
-  )
+      {/* Action Buttons */}
+      <motion.div className="flex space-x-4" variants={itemVariants}>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Button asChild>
+            <Link href="/asset/cv/cv.pdf" target="_blank" className="flex items-center space-x-2">
+              <FcDownload className="h-5 w-5" />
+              <span>Download CV</span>
+            </Link>
+          </Button>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Button
+            variant="secondary"
+            onClick={() => onTabChange('Contact')}
+          >
+            Contact Me
+          </Button>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
 }
 
-
-export default SideBar
+export default SideBar;

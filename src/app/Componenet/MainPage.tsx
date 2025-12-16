@@ -1,32 +1,28 @@
 
 
 "use client"
-
-import { useEffect } from "react";
-import "aos/dist/aos.css";
-import Aos from "aos";
+import { useState } from "react";
 import SideBar from "./Sidebar";
 import Detail from "./Detail";
 
 const MainPage = () => {
+  const [activeTab, setActiveTab] = useState("About");
 
-  useEffect(() => {
-    Aos.init({
-      once: false
-    });
-  }, []);
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
 
   return (
-    <div className="flex overflow-hidden h-screen">
+    <div className="md:flex md:h-screen overflow-hidden">
       {/*sidebar*/}
-      <div className="w-1/3">
-        <SideBar />
+      <div className="w-full md:w-1/3 lg:w-1/4 md:h-screen md:overflow-y-auto">
+        <SideBar onTabChange={handleTabChange} />
       </div>
 
 
       {/*Detail*/}
-      <div className="w-full">
-        <Detail />
+      <div className="w-full md:flex-1">
+        <Detail activeTab={activeTab} onTabChange={handleTabChange} />
       </div>
 
     </div>

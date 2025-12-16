@@ -1,120 +1,162 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { SchoolIcon } from 'lucide-react'
-import { FaGithub } from "react-icons/fa";
+"use client";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "./button";
+import Link from "next/link";
+import Image from "next/image";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { X } from "lucide-react";
 
-import React, { useState } from 'react'
-import { Button } from './button'
-import Link from 'next/link';
-import Image from 'next/image';
+// Enhanced project data
+const projects = [
+  {
+    title: "E-commerce Platform",
+    description: "A full-featured e-commerce site built with Next.js and Shopify integration, offering a seamless shopping experience.",
+    image: "/asset/pexels-moh-adbelghaffar-771742.jpg", // Replace with actual project image
+    tags: ["Next.js", "React", "Shopify", "Tailwind CSS"],
+    liveUrl: "#",
+    codeUrl: "https://github.com/arhamjawed66",
+  },
+  {
+    title: "Todo App with React",
+    description: "A classic todo application to manage daily tasks, built with React and featuring state management for a dynamic user experience.",
+    image: "/asset/download.png", // Replace with actual project image
+    tags: ["React", "JavaScript", "CSS"],
+    liveUrl: "https://reaxt-todo-fanicae.vercel.app/",
+    codeUrl: "https://github.com/arhamjawed66",
+  },
+  {
+    title: "Firebase Auth Demo",
+    description: "A project demonstrating user authentication state changes using Firebase, providing a foundation for secure applications.",
+    image: "/asset/download.png", // Replace with actual project image
+    tags: ["Firebase", "JavaScript", "HTML"],
+    liveUrl: "https://arhamjawed66.github.io/firebase-stattechange/",
+    codeUrl: "https://github.com/arhamjawed66",
+  },
+   {
+    title: "Kids Learning Book",
+    description: "An interactive web-based book for children, designed to be engaging and educational with simple UI.",
+    image: "/asset/download.png", // Replace with actual project image
+    tags: ["HTML", "CSS", "JavaScript"],
+    liveUrl: "https://arhamjawed66.github.io/kids-book/",
+    codeUrl: "https://github.com/arhamjawed66",
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
+};
 
 const Project = () => {
-  const assigmt_arry = [{
-    name: "count_Down",
-    date: "10-jan-2024",
-    code: "https://arhamjawed66.github.io/bakraeid-countdown/ "
-  },
-  {
-    name: "world clock",
-    date: "20-jan-2024",
-    code: "https://arhamjawed66.github.io/Digital-clock/ "
-  },
-  {
-    name: "Table Work",
-    date: "15-Nov-2023",
-    code: "https://arhamjawed66.github.io/table.work-html/"
-  },
-  {
-    name: "KIds Book",
-    date: "20-Nov-2023",
-    code: "https://arhamjawed66.github.io/kids-book/"
-  },
-  {
-    name: "Todo Atendance",
-    date: "05-Jan-2024",
-    code: " https://arhamjawed66.github.io/Todo_atendance/"
-  },
-  {
-    name: "Todo Card",
-    date: "12-Feb-2024",
-    code: " https://arhamjawed66.github.io/Todo-card/"
-  },
-  {
-    name: "FireBase State",
-    date: "10-jul-2024",
-    code: "https://arhamjawed66.github.io/firebase-stattechange/"
-  },
-  {
-    name: "Todo with React",
-    date: "03-sep-2024",
-    code: "https://reaxt-todo-fanicae.vercel.app/"
-  },
-  ];
-
+  const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <Card className='h-[85vh] overflow-y-auto bg-sky-50'>
-      <CardHeader>
-        <CardTitle className='uppercase'>projects</CardTitle>
-      </CardHeader>
-      <CardContent >
-        {/* <div data-aos="zoom-in" className=" flex flex-wrap -m-4"> */}
-        {/* <div className="container px-5 py-24 mx-auto "> */}
-        <div data-aos="zoom-in" className="flex  flex-wrap gap-5  ">
-          {assigmt_arry.map((item, index) => (
-            <div key={index} className=" -m-4 mb-5 border-r-zinc-700 ">
-              <div className="lg:w-1/1 sm:w-1/1 p-4 ">
-                <div className="flex relative">
-
-                  <Image
-                    src="/asset/download.png"    
-                    alt="Download Icon"          
-                    width={500}                  
-                    height={300}                 
-                    className="absolute inset-0 w-full h-full object-cover object-center"
-                  />
-                  <div className="px-8 py-10 relative z-10 w-full border-2 border-gray-400 bg-white opacity-0 hover:opacity-100">
-                    <h2 className="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">
-                      {item.date}
-                    </h2>
-                    <h1 className="title-font text-lg font-medium text-gray-900 mb-10">
-                      {item.name}
-                    </h1>
-                    <div>
-                      <Link href={item.code} target='_blank' className="leading-relaxed ">
-                        <Button>
-                          <FaGithub className='mr-5 text-2xl hover:text-[#dedcf1b3]' />
-                          preview</Button>
-                      </Link>
+    <>
+      <Card className="h-[85vh] overflow-y-auto border-none shadow-none">
+        <CardHeader>
+          <CardTitle className="uppercase text-2xl font-bold text-primary">
+            My Projects
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            {projects.map((project) => (
+              <motion.div
+                key={project.title}
+                variants={itemVariants}
+                className="cursor-pointer"
+                onClick={() => setSelectedProject(project)}
+              >
+                <div className="bg-card border rounded-lg overflow-hidden group">
+                  <div className="overflow-hidden relative h-48">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold text-foreground mb-2">{project.title}</h3>
+                    <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map(tag => (
+                        <span key={tag} className="text-xs font-semibold bg-accent text-accent-foreground px-2 py-1 rounded-full">{tag}</span>
+                      ))}
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </CardContent>
+      </Card>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              className="bg-card rounded-xl max-w-2xl w-full overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative h-64">
+                <Image src={selectedProject.image} alt={selectedProject.title} fill className="object-cover" />
               </div>
-            </div>
-          ))}
+              <div className="p-6">
+                <div className="flex justify-between items-start">
+                  <h2 className="text-2xl font-bold text-primary mb-2">{selectedProject.title}</h2>
+                  <Button variant="ghost" size="icon" onClick={() => setSelectedProject(null)}>
+                    <X className="h-6 w-6" />
+                  </Button>
+                </div>
+                <p className="text-muted-foreground mb-4">{selectedProject.description}</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {selectedProject.tags.map(tag => (
+                    <span key={tag} className="text-sm font-semibold bg-accent text-accent-foreground px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <div className="flex space-x-4">
+                  <Button asChild>
+                    <Link href={selectedProject.liveUrl} target="_blank" className="flex items-center gap-2">
+                      <FaExternalLinkAlt /> Live Demo
+                    </Link>
+                  </Button>
+                  <Button variant="secondary" asChild>
+                    <Link href={selectedProject.codeUrl} target="_blank" className="flex items-center gap-2">
+                      <FaGithub /> View Code
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
 
-
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {/* </div> */}
-        {/* </div> */}
-
-      </CardContent>
-    </Card>
-  )
-}
-
-export default Project
-
+export default Project;
 
