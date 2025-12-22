@@ -1,5 +1,5 @@
 
-import MainPage from "./Componenet/MainPage";
+import MainPage from "../components/MainPage";
 
 
 

@@ -40,7 +40,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = (fromLeft: boolean) => ({
+const itemVariants = (fromLeft) => ({
   hidden: { x: fromLeft ? -100 : 100, opacity: 0 },
   visible: {
     x: 0,
@@ -56,11 +56,11 @@ const Education = () => {
   return (
     <Card className="h-[85vh] overflow-y-auto border-none shadow-none">
       <CardHeader>
-        <CardTitle className="uppercase text-2xl font-bold text-primary">
+        <CardTitle className="uppercase text-xl md:text-2xl font-bold text-primary">
           Education & Certification
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-4">
+      <CardContent className="p-3 md:p-4">
         <div className="relative">
           {/* Vertical line */}
           <div className="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-border"></div>
@@ -75,7 +75,7 @@ const Education = () => {
             {educationHistory.map((item, index) => (
               <motion.div
                 key={index}
-                className={`relative flex items-center ${
+                className={`relative flex items-center justify-center sm:${
                   index % 2 === 0 ? "justify-start" : "justify-end"
                 }`}
                 variants={itemVariants(index % 2 === 0)}
@@ -84,8 +84,8 @@ const Education = () => {
                 <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-2 border-card"></div>
 
                 <Card
-                  className={`w-[calc(50%-2rem)] ${
-                    index % 2 === 0 ? "mr-auto" : "ml-auto"
+                  className={`w-full sm:w-[calc(50%-2rem)] ${
+                    index % 2 === 0 ? "sm:mr-auto" : "sm:ml-auto"
                   }`}
                 >
                   <CardHeader>
