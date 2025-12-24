@@ -45,11 +45,11 @@ const SideBar = ({ onTabChange, isSidebarOpen, toggleSidebar }) => {
     { Icon: SiGit, color: 'text-orange-500' },
   ];
 
-  const [orbitRadius, setOrbitRadius] = useState(120);
+  const [orbitRadius, setOrbitRadius] = useState(100);
 
   useEffect(() => {
     const updateRadius = () => {
-      setOrbitRadius(window.innerWidth < 768 ? 80 : 120);
+      setOrbitRadius(window.innerWidth < 768 ? 25 : 100);
     };
     updateRadius();
     window.addEventListener('resize', updateRadius);
@@ -57,11 +57,11 @@ const SideBar = ({ onTabChange, isSidebarOpen, toggleSidebar }) => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center p-4 space-y-6 bg-secondary/30 relative">
+    <div className="h-screen flex flex-col justify-center items-center p-2 md:p-4 space-y-4 md:space-y-6 bg-secondary/30 relative hidden lg:flex">
       {/* Toggle Button */}
       <motion.button
         onClick={toggleSidebar}
-        className="absolute top-4 right-4 z-10 p-2 bg-primary text-primary-foreground rounded-full shadow-lg hover:bg-primary/80 transition-colors"
+        className="absolute top-4 right-4 z-10 p-2 bg-primary text-primary-foreground rounded-full shadow-lg hover:bg-primary/80 transition-colors md:block hidden"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
@@ -70,20 +70,28 @@ const SideBar = ({ onTabChange, isSidebarOpen, toggleSidebar }) => {
 
       {/* Sidebar Content */}
       <motion.div
-        className="flex flex-col justify-center items-center space-y-6"
+        className="flex flex-col justify-center items-center space-y-4 md:space-y-6"
         animate={{ opacity: isSidebarOpen ? 1 : 0 }}
         transition={{ duration: 0.3 }}
       >
         {/* Image with Orbiting Icons */}
         <motion.div variants={itemVariants} className="relative">
-          <Image
-            src="/asset/pexels-moh-adbelghaffar-771742.jpg"
-            alt="Abdul Jawed"
-            width={150}
-            height={150}
-            className="rounded-full border-4 border-primary shadow-lg shadow-primary/50"
-            priority
-          />
+          <motion.div
+            animate={{ scale: isSidebarOpen ? 1 : 0.5, opacity: isSidebarOpen ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex justify-center"
+          >
+            <div className="p-1 bg-gradient-to-r from-primary to-secondary rounded-full">
+              <Image
+                src="/asset/pexels-moh-adbelghaffar-771742.jpg"
+                alt="Abdul Jawed"
+                width={128}
+                height={128}
+                className="rounded-full object-cover w-20 h-20 md:w-32 md:h-32 shadow-lg shadow-primary/50"
+                priority
+              />
+            </div>
+          </motion.div>
           {/* Orbiting Icons */}
           <motion.div
             className="absolute inset-0"

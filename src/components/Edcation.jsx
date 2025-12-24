@@ -56,7 +56,7 @@ const Education = () => {
   return (
     <Card className="h-[85vh] overflow-y-auto border-none shadow-none">
       <CardHeader>
-        <CardTitle className="uppercase text-xl md:text-2xl font-bold text-primary">
+        <CardTitle className="uppercase text-lg md:text-xl lg:text-2xl font-bold text-primary">
           Education & Certification
         </CardTitle>
       </CardHeader>

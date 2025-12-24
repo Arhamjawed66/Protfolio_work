@@ -16,15 +16,15 @@ import Experience from "./Experience";
 export function Detail({ activeTab, onTabChange }) {
   return(
     <div className="h-screen flex flex-col">
-  
+
     <Tabs value={activeTab} onValueChange={onTabChange} className="mt-5 w-full p-2 flex-col ">
-      <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-        <TabsTrigger value="About" className="text-lg">About</TabsTrigger>
-        <TabsTrigger value="Experience" className="text-lg">Experience</TabsTrigger>
-        <TabsTrigger value="Education" className="text-lg">Education</TabsTrigger>
-        <TabsTrigger value="Skill" className="text-lg">Skill</TabsTrigger>
-        <TabsTrigger value="Project" className="text-lg">Project</TabsTrigger>
-        <TabsTrigger value="Contact" className="text-lg">Contact</TabsTrigger>
+      <TabsList className="hidden md:grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-1 md:gap-2">
+        <TabsTrigger value="About" className="text-sm md:text-lg">About</TabsTrigger>
+        <TabsTrigger value="Experience" className="text-sm md:text-lg">Experience</TabsTrigger>
+        <TabsTrigger value="Education" className="text-sm md:text-lg">Education</TabsTrigger>
+        <TabsTrigger value="Skill" className="text-sm md:text-lg">Skill</TabsTrigger>
+        <TabsTrigger value="Project" className="text-sm md:text-lg">Project</TabsTrigger>
+        <TabsTrigger value="Contact" className="text-sm md:text-lg">Contact</TabsTrigger>
         </TabsList>
 
         <TabsContent value="About">

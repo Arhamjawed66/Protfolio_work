@@ -43,7 +43,7 @@ const Contact = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           onSubmit={handleSubmit}
-          className="max-w-xl mx-auto space-y-6"
+          className="max-w-xl mx-auto space-y-4 md:space-y-6"
         >
           <motion.div variants={itemVariants}>
             <label htmlFor="name" className="text-sm font-medium text-muted-foreground">Name</label>

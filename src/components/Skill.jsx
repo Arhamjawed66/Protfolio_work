@@ -92,7 +92,7 @@ const Skill = () => {
   return (
     <Card className="h-[85vh] overflow-y-auto border-none shadow-none">
       <CardHeader>
-        <CardTitle className="uppercase text-2xl font-bold text-primary">
+        <CardTitle className="uppercase text-xl md:text-2xl font-bold text-primary">
           My Skillset
         </CardTitle>
       </CardHeader>
@@ -110,7 +110,7 @@ const Skill = () => {
                 {category} Development
               </h3>
               <motion.div
-                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+                className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
                 variants={skillContainerVariants}
                 initial="hidden"
                 whileInView="visible"

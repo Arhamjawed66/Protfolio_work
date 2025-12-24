@@ -53,13 +53,13 @@ const Experience = () => {
   return (
     <Card className="h-[85vh] overflow-y-auto border-none shadow-none bg-slate-950">
       <CardHeader>
-        <CardTitle className="uppercase text-2xl font-bold text-primary">
+        <CardTitle className="uppercase text-xl md:text-2xl font-bold text-primary">
           Experience
         </CardTitle>
       </CardHeader>
       <CardContent>
         <motion.div
-          className="space-y-6"
+          className="space-y-4 md:space-y-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
